@@ -1,19 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//React.createElement => React element(object) => HTML element(.render)
-// const heading = React.createElement("div", { id: "heading" }, "Namaste");
+//Components , React elements - we can put anything in anything
+const elem = <span>HI there</span>;
 
-//JSX - HTML-like or XML-like syntax
-//JSX is transpiled before it reaches the JS Engine - PARCEL - BABEL
-//JSX - Babel transpiles to React.createElement => React element(object) => HTML element(.render)
-const jsxHeading = (<h1 className="heading">
-  Namaste inside JSX
-</h1>);
+const Title = () => (
+  <h1 className="heading">
+    {elem}
+    Namaste inside JSX
+  </h1>
+);
 
-// console.log(heading)
-console.log(jsxHeading)
+// const data = api.getData(); 
+
+//Component Composition --> component inside component
+const HeadingComponent = () => (
+  <div className="container">
+    {/* {data} -> even if the above api passes some malicious code, jsx will escape it */}
+    {/* jsx sanitizes the data  and then executes*/}
+    {Title()}
+    {/* <h2>{10 + 100}</h2> */}
+    <h1 className="heading">Namaste Fn Component</h1>
+  </div>
+);
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(jsxHeading);
+root.render(<HeadingComponent />);
+// root.render(Title);
