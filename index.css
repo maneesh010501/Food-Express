@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif */
 }
 
 .header {
@@ -29,15 +28,20 @@
 .res-card {
   padding: 5px;
   width: 225px;
-  height: 340px;
+  height: 345px;
   background-color: rgb(230, 229, 229);
-  line-height: 0.2em;
+  line-height: 1.1em;
   border-radius: 7px;
   margin: 12px;
 }
 
+h3 {
+  margin: 2px;
+}
+
 h5 {
   font-weight: normal;
+  margin: 2px;
 }
 
 .res-card:hover {
