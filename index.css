@@ -29,11 +29,15 @@
 .res-card {
   padding: 5px;
   width: 225px;
-  height: 325px;
+  height: 340px;
   background-color: rgb(230, 229, 229);
-  line-height: 0.3em;
+  line-height: 0.2em;
   border-radius: 7px;
   margin: 12px;
+}
+
+h5 {
+  font-weight: normal;
 }
 
 .res-card:hover {
@@ -52,7 +56,7 @@
   border-radius: 7px;
 }
 
-.res-container{
+.res-container {
   display: flex;
   flex-wrap: wrap;
 }
