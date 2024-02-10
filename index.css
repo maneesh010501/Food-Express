@@ -19,7 +19,7 @@
 
 .logo:hover {
   cursor: pointer;
-  transform: scale(0.85);
+  transform: scale(0.9);
 }
 
 .nav-items > ul {

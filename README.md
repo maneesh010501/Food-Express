@@ -17,3 +17,20 @@
 - HTTPS
 - Tree Shaking - remove unused code
 - Different dev and prod builds
+
+
+# Food Express
+
+Header
+
+- Logo
+- Nav Items
+  Body
+- Search
+- RestaurantContainer
+  - RestaurantCard - Img - Name of res, star rating, cuisine, delivery time
+    Footer
+- Copyright
+- Links
+- Address
+- Contact
