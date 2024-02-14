@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer";
 const Body = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
         fetchData();
@@ -12,18 +13,23 @@ const Body = () => {
 
 
     const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/mapi/homepage/getCards?lat=13.0826802&lng=80.2707184");
+        // const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 
         const json = await data.json();
-
-        console.log(json.data.success.cards[1].gridWidget.gridElements.infoWithStyle.restaurants);
-        setListOfRestaurants(json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
-    }
-    if (listOfRestaurants.length === 0) {
-        return <Shimmer />;
+        // console.log(json)
+        console.log(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+        setListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
     }
 
-    return (
+    //conditional rendering
+
+    return listOfRestaurants.length === 0 ? <div>
+        <div className="loading-container">
+            <h1>Looking for great food near you ...</h1>
+        </div>
+        <div><Shimmer /></div>
+    </div> : (
         <div className="body">
             <div className="filter">
                 <button className="filter-btn" onClick={() => {
@@ -32,6 +38,15 @@ const Body = () => {
                 }}>
                     Top Rated Restaurants
                 </button>
+                <div className="search">
+                    <input type="text" className="search-box" placeholder="Search for restaurants"
+                        value={searchText} onChange={(e) => { setSearchText(e.target.value) }} />
+                    <button className="search-btn" onClick={() => {
+                        const filteredRestaurants = listOfRestaurants.filter(
+                            restaurant => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()));
+                        setListOfRestaurants(filteredRestaurants);
+                    }}>search</button>
+                </div>
             </div>
             <div className="res-container">
                 {

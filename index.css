@@ -1,14 +1,19 @@
 * {
   box-sizing: border-box;
   font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   /* border: 1px solid black; */
-  height: 95px;
-  margin: 20px;
+  height: auto;
+  /* margin: 20px; */
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
 }
 
 .logo {
@@ -25,7 +30,7 @@
 .nav-items > ul {
   display: flex;
   list-style-type: none;
-  padding: 0px 0px;
+  padding: 17px 10px;
   font-size: 17px;
 }
 
@@ -43,16 +48,16 @@
 .res-card {
   padding: 5px;
   width: 225px;
-  height: 345px;
+  height: 375px;
   /* background-color: rgb(242, 242, 242); */
-  line-height: 1.1em;
+  line-height: 1.2em;
   border-radius: 7px;
-  margin: 20px 12px;
+  margin: 10px 15px;
   transition: all 0.2s ease-in-out;
 }
 
-h3 {
-  margin: 3px 0px;
+h4 {
+  margin: 4px 0px;
 }
 
 h5 {
@@ -67,11 +72,6 @@ h5 {
   transform: scale(1.15);
 }
 
-.search {
-  padding: 20px;
-  font-size: 20px;
-}
-
 .res-logo {
   width: 100%;
   height: 60%;
@@ -81,6 +81,10 @@ h5 {
 .res-container {
   display: flex;
   flex-wrap: wrap;
+  margin: 0px 20px;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid black; */
 }
 
 .rating-n-tod {
@@ -97,17 +101,24 @@ h5 {
   margin-right: 5px;
 }
 
-.filter-btn {
+/* .filter-btn {
   margin: 15px 20px;
   cursor: pointer;
   border-radius: 15px;
   height: 30px;
   width: 170px;
+} */
+
+.filter-btn {
+  margin-right: 20px;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .shimmer-container {
   display: flex;
   flex-wrap: wrap;
+  margin: 50px 122px;
 }
 
 .shimmer-card {
@@ -116,4 +127,54 @@ h5 {
   background-color: rgb(242, 242, 242);
   border-radius: 7px;
   margin: 20px 12px;
+}
+
+.grey {
+  color: rgb(143, 143, 143);
+}
+
+.login {
+  width: 70px;
+  height: 35px;
+  padding: 0px auto;
+  margin: 12px 0px;
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid black; */
+  margin: 20px;
+}
+
+.search {
+  display: flex;
+  height: 40px;
+}
+
+.search-btn {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.search-box {
+  width: 500px;
+  margin: 0px;
+  padding: 5px;
+}
+
+.loading-container {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 39);
+  color: white;
+}
+
+.loading-container h1 {
+  font-weight: normal;
 }
