@@ -112,7 +112,9 @@ h5 {
 .filter-btn {
   margin-right: 20px;
   cursor: pointer;
-  padding: 5px;
+  padding: 5px 25px;
+  border: 1.5px solid rgb(222, 222, 222);
+  border-radius: 5px;
 }
 
 .shimmer-container {
@@ -157,13 +159,17 @@ h5 {
 
 .search-btn {
   cursor: pointer;
-  padding: 5px;
+  padding: 5px 15px;
+  border: 1.5px solid rgb(222, 222, 222);
+  border-radius: 5px;
 }
 
 .search-box {
   width: 500px;
   margin: 0px;
   padding: 5px;
+  border: 1.5px solid rgb(222, 222, 222);
+  border-radius: 5px;
 }
 
 .loading-container {
