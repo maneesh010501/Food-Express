@@ -1,28 +1,16 @@
-import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-    const [resInfo, setResInfo] = useState(null);
-
     const { resId } = useParams();
 
-    useEffect(() => {
-        fetchMenu();
-    }, [])
-
-    const fetchMenu = async () => {
-        const data = await fetch(MENU_API + resId);
-        const json = await data.json();
-        console.log(json);
-        setResInfo(json.data);
-    }
+    const resInfo = useRestaurantMenu(resId);
 
     if (resInfo === null) return <Shimmer />;
 
-    const { name, cuisines, locality, costForTwoMessage, sla, areaName, feeDetails, avgRating, totalRatingsString } = resInfo?.cards[0]?.card?.card?.info;
-    const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    const { name, cuisines, locality, costForTwoMessage, sla, areaName, feeDetails, avgRating, totalRatingsString } = resInfo?.cards[2]?.card?.card?.info;
+    const { itemCards, title } = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
     console.log(itemCards);
 
     return (
@@ -36,7 +24,7 @@ const RestaurantMenu = () => {
                     <h5>{sla.deliveryTime} mins</h5>
                     <h5>{areaName}</h5>
                     <h5>{feeDetails.message}</h5>
-                    <h3>Recommended</h3>
+                    <h3>{title}</h3>
                     <ul>
                         {itemCards.map(item => <li key={item.card.info.id}>{item.card.info.name} - Rs.{item.card.info.price / 100 || item.card.info.defaultPrice / 100}</li>)}
                     </ul>

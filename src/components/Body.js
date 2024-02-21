@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
 
@@ -22,44 +23,47 @@ const Body = () => {
         // console.log(json)
         console.log(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
         setListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-        setfilteredRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-    }
+        setfilteredRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);    
+}
 
-    //conditional rendering
+const onlineStatus = useOnlineStatus();
+if (onlineStatus === false) return <h2>Looks like you're offline! Please check your internet connection.</h2>
 
-    return listOfRestaurants.length === 0 ? <div>
-        <div className="loading-container">
-            <h1>Looking for great food near you ...</h1>
-        </div>
-        <><Shimmer /></>
-    </div> : (
-        <div className="body">
-            <div className="filter">
-                <button className="filter-btn" onClick={() => {
-                    const filtered = listOfRestaurants.filter(restaurant => restaurant.info.avgRating > 4.5);
-                    setfilteredRestaurants(filtered);
-                }}>
-                    Explore Top Rated Restaurants
-                </button>
-                <div className="search">
-                    <input type="text" className="search-box" placeholder="Search for restaurants"
-                        value={searchText} onChange={(e) => { setSearchText(e.target.value) }} />
-                    <button className="search-btn" onClick={() => {
-                        const filteredRestaurants = listOfRestaurants.filter(
-                            restaurant => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()));
-                        setfilteredRestaurants(filteredRestaurants);
-                    }}>search</button>
-                </div>
-            </div>
-            <div className="res-container">
-                {
-                    filteredRestaurants.map(restaurant =>
-                        <Link to={"/restaurants/" + restaurant.info.id} key={restaurant.info.id} className="res-link"><RestaurantCard resData={restaurant} /></Link>
-                    )
-                }
+//conditional rendering
+
+return listOfRestaurants.length === 0 ? <div>
+    <div className="loading-container">
+        <h1>Looking for great food near you ...</h1>
+    </div>
+    <><Shimmer /></>
+</div> : (
+    <div className="body">
+        <div className="filter">
+            <button className="filter-btn" onClick={() => {
+                const filtered = listOfRestaurants.filter(restaurant => restaurant.info.avgRating > 4.5);
+                setfilteredRestaurants(filtered);
+            }}>
+                Explore Top Rated Restaurants
+            </button>
+            <div className="search">
+                <input type="text" className="search-box" placeholder="Search for restaurants"
+                    value={searchText} onChange={(e) => { setSearchText(e.target.value) }} />
+                <button className="search-btn" onClick={() => {
+                    const filteredRestaurants = listOfRestaurants.filter(
+                        restaurant => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()));
+                    setfilteredRestaurants(filteredRestaurants);
+                }}>search</button>
             </div>
         </div>
-    )
+        <div className="res-container">
+            {
+                filteredRestaurants.map(restaurant =>
+                    <Link to={"/restaurants/" + restaurant.info.id} key={restaurant.info.id} className="res-link"><RestaurantCard resData={restaurant} /></Link>
+                )
+            }
+        </div>
+    </div>
+)
 };
 
 export default Body;
