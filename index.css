@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Ubuntu", sans-serif;
+  /* font-family: "Ubuntu", sans-serif; */
 }
 
 .shimmer-container {
@@ -21,10 +21,11 @@
 }
 
 .loading-container {
-  height: 300px;
+  height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* background-color: rgb(127, 0, 0); */
   background-color: rgb(0, 0, 39);
   color: white;
 }

@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import express2 from '../../express2.png';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
 
 const Header = () => {
     const [btnName, setBtnName] = useState("Login");
     // console.log("header render");
     const onlineStatus = useOnlineStatus();
+    const { loggedInUser } = useContext(UserContext);
+    // console.log(loggedInUser);
 
     return (
         <div className="flex justify-between shadow-lg">
@@ -14,7 +17,7 @@ const Header = () => {
                 <Link to="/"><img className="logo w-30 h-[80px] transition-all duration-200 hover:scale-110" src={express2} alt="" /></Link>
             </div>
             <div className="flex items-center">
-                <ul className="flex p-2 m-2">
+                <ul className="flex p-2 m-2 font-semibold text-gray-700">
                     <li className="px-4">
                         Online Status : {onlineStatus ? "✅" : "🔴"}
                     </li>
@@ -36,6 +39,7 @@ const Header = () => {
                     <button className="login px-4  hover:text-red-500" onClick={() => {
                         btnName === "Login" ? setBtnName("Logout") : setBtnName("Login")
                     }}>{btnName}</button>
+                    <li>{loggedInUser}</li>
                 </ul>
             </div>
         </div>

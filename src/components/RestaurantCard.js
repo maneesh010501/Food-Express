@@ -4,6 +4,7 @@ const RestaurantCard = (props) => {
     const { resData } = props;
     const { cloudinaryImageId, name, cuisines, costForTwo, avgRating, sla, locality } = resData.info;
     const { deliveryTime, slaString } = sla;
+
     return (
         <div className="res-card w-[200px] m-5 h-[312px] rounded-lg shadow hover:shadow-2xl relative">
             <img className="res-logo rounded-lg h-[200px] w-[200px]" src={CDN_URL + cloudinaryImageId} alt="res-logo" />
@@ -13,18 +14,32 @@ const RestaurantCard = (props) => {
                     <img className="star w-[30px]" src="https://img.freepik.com/premium-vector/stars-quality-icon-isolated-white-background-stars-rating-review-icon-website-mobile-apps_97458-1050.jpg" alt="" />
                     {/* <img className="star" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTezyN8WrLRY3kSJvMYWVHktECJO7tacp1sIw&usqp=CAU" alt="" /> */}
                     <h5 className="rating mr-3">{avgRating}</h5>
-                    <h5 className="tod bg-yellow-100 rounded-2xl p-1 absolute top-0 mt-1 font-normal flex justify-center items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
+                    <h5 className="tod bg-yellow-100 rounded p-1 absolute top-0 left-0 font-normal flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1 mt-[1]">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <span className="">{slaString}</span></h5>
+                        <span className="">{slaString}</span>
+                    </h5>
                 </div>
                 <h5 className=" pl-1">{cuisines.join(", ").length < 25 ? cuisines.join(", ") : `${cuisines.join(", ").slice(0, 25)}...`}</h5>
                 {/* <h5>{costForTwo}</h5> */}
-                <h5 className=" pl-1">{locality.length < 30 ? locality : `${locality.slice(0, 30)}...`}</h5>
+                <h5 className=" pl-1">{locality.length < 25 ? locality : `${locality.slice(0, 25)}...`}</h5>
+
             </div>
         </div>
     )
+};
+
+
+export const vegLabel = (RestaurantCard) => {
+    return (props) => {
+        return (
+            <div className="relative">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/1200px-Veg_symbol.svg.png" alt="" className="absolute bg-green-600 text-white z-10 bottom-[116] right-6 text-xs w-5" />
+                <RestaurantCard {...props} />
+            </div>
+        );
+    };
 };
 
 export default RestaurantCard;
