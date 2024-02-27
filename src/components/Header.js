@@ -3,6 +3,7 @@ import express2 from '../../express2.png';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import UserContext from '../utils/UserContext';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const [btnName, setBtnName] = useState("Login");
@@ -10,6 +11,10 @@ const Header = () => {
     const onlineStatus = useOnlineStatus();
     const { loggedInUser } = useContext(UserContext);
     // console.log(loggedInUser);
+
+    //subscribing to our store using a selector
+    const cartItems = useSelector((store) => store.cart.items);
+    console.log(cartItems);
 
     return (
         <div className="flex justify-between shadow-lg">
@@ -22,19 +27,19 @@ const Header = () => {
                         Online Status : {onlineStatus ? "✅" : "🔴"}
                     </li>
                     <li className="px-4 hover:text-orange-500">
-                        <Link to="/grocery" className='nav-link'>Grocery</Link>
+                        <Link to="/grocery">Grocery</Link>
                     </li>
                     <li className="px-4  hover:text-orange-500">
-                        <Link to="/" className='nav-link'>Home</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li className="px-4  hover:text-orange-500">
-                        <Link to="/about" className='nav-link'>About Us</Link>
+                        <Link to="/about">About Us</Link>
                     </li>
                     <li className="px-4  hover:text-orange-500">
-                        <Link to="/contact" className='nav-link'>Contact</Link>
+                        <Link to="/contact">Contact</Link>
                     </li>
                     <li className="px-4  hover:text-orange-500">
-                        <Link to="/cart" className='nav-link'>Cart</Link>
+                        <Link to="/cart" className="font-bold">Cart ({cartItems.length} items)</Link>
                     </li>
                     <button className="login px-4  hover:text-red-500" onClick={() => {
                         btnName === "Login" ? setBtnName("Logout") : setBtnName("Login")
